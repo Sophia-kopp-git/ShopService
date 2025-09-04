@@ -1,7 +1,11 @@
 package org.example;
 
 public class ShopService {
+    OrderMapRepo orderMapRepo = new OrderMapRepo();
 
+    public ShopService(OrderMapRepo orderMapRepo) {
+    this.orderMapRepo = orderMapRepo;
+    }
 
     void addNewOrder(Order order){
         for (Product product : order.orderedProducts()){
@@ -9,6 +13,6 @@ public class ShopService {
                 System.out.println("Product with id " + product.id() + " is not available.");
             }
         }
-        OrderListRepo.orders.add(order);
+        orderMapRepo.addOrder(order);
     }
 }

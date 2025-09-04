@@ -4,24 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class OrderListRepo {
+public class OrderListRepo implements OrderRepo {
     static List<Order> orders = new ArrayList<>();
 
+    @Override
     public List<Order> getAllOrders() {
         return orders;
     }
 
-    public void getOrderById() {
-
-    }
-
+    @Override
     public void addOrder(Order order) {
         orders.add(order);
     }
 
-    public void deleteOrder(Order order) {
+    @Override
+    public void removeOrder(Order order) {
         orders.remove(order);
     }
+
+    @Override
+    public Order getOrderById(String id) {
+        Order searchedOrder = null;
+        for (Order order : orders) {
+            searchedOrder = order.orderId().equals(id) ? order : null;
+        }
+        return searchedOrder;
+    }
+
 
     public OrderListRepo(List<Order> orders) {
         OrderListRepo.orders = orders;
